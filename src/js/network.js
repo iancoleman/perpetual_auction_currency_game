@@ -11,13 +11,13 @@ network = new (function() {
 
     this.makeRandomSections = function() {
         self.sections = [];
-        let totalSections = prng.nextRange(6, 10);
+        let totalSections = prng.nextRange(config.sections.min, config.sections.max);
         mySectionIndex = prng.nextRange(0, totalSections);
         for (let i=0; i<totalSections; i++) {
             let s = new Section();
             self.sections.push(s);
             self.el.appendChild(s.el);
-            let nodesInSection = prng.nextRange(15,30);
+            let nodesInSection = prng.nextRange(config.nodes_per_section.min, config.nodes_per_section.max);
             let isMySection = mySectionIndex == i;
             if (isMySection) {
                 myNodeIndex = prng.nextRange(0, nodesInSection);

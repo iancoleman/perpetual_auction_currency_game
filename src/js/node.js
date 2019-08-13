@@ -7,7 +7,7 @@ Node = function() {
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
 
-    this.value = prng.nextRange(1200,1400);
+    this.value = prng.nextRange(config.bid.min, config.bid.max);
 
     this.el.textContent = this.value;
 

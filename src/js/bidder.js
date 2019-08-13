@@ -10,9 +10,11 @@ Bidder = function() {
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
 
-    this.value = prng.nextRange(1000,2000);
+    this.value = prng.nextRange(config.bid.min, config.bid.max);
 
     let input = this.el.querySelectorAll("input")[0];
+    input.setAttribute("min", config.bid.min);
+    input.setAttribute("max", config.bid.max);
     input.value = this.value;
 
     input.addEventListener("input", handleInput);
