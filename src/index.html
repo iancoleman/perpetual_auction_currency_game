@@ -5,6 +5,21 @@
         <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
+
+        <button id="settings-show">Settings</button>
+        <div id="settings-modal" class="hidden">
+            <div id="settings">
+                <button id="settings-hide">Close</button>
+                <h1>Settings</h1>
+                <div class="population-strategy">
+                    Node type:
+                    <select id="network-population">
+                        <option name="random-constant-bid">Random constant bid</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <p>
             The rules of the game can be found at
             <a href="https://safenetforum.org/t/perpetual-auction-currency/29488">
