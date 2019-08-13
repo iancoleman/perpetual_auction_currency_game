@@ -29,9 +29,8 @@
 
 .boards {
     width: 350px;
-    text-align: center;
     border: 1px solid red;
-    position: inherit
+    display: inline-block;
 }
 
 .leaderboard {
