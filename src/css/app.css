@@ -1,0 +1,40 @@
+.section {
+    padding: 2em 0;
+}
+
+.section:nth-of-type(odd) {
+    background-color: #EEE;
+}
+
+.section.active-neighbour {
+    background-color: #3E3;
+}
+
+.node,
+.bidder {
+    padding: 5px;
+    margin: 2px;
+    display: inline-block;
+}
+
+.median,
+.median input {
+    background-color: rgba(255,255,0,0.5);
+}
+
+.bidder input {
+    width: 60px;
+    border: solid 4px #F00;
+}
+
+.leaderboard .my-bid {
+    background-color: rgba(255,0,255,0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+.highlight {
+    font-weight: bold;
+}
