@@ -56,41 +56,6 @@ Section = function() {
         return bid;
     }
 
-    //this.calcRewards = function(nb) {
-    //    // Uses a weighting system.
-    //    // This will change in the future.
-    //    // Code here is not very efficient but is ok for now.
-    //    let totalDistance = 0;
-    //    // Calculate total distance
-    //    for (let i = 0; i < self.nodes.length; i++) {
-    //        let distance = Math.abs(self.nodes[i].value - nb);
-    //        totalDistance = totalDistance + distance;
-    //    }
-    //    // Calculate total weight
-    //    let totalWeight = 0;
-    //    for (let i = 0; i < self.nodes.length; i++) {
-    //        let distance = Math.abs(self.nodes[i].value - nb);
-    //        let weight = totalDistance - distance;
-    //        totalWeight = totalWeight + weight;
-    //    }
-    //    // Calculate reward from portion of weight
-    //    let rewards = [];
-    //    for (let i = 0; i < self.nodes.length; i++) {
-    //        let node = self.nodes[i];
-    //        let distance = Math.abs(node.value - nb);
-    //        let weight = totalDistance - distance;
-    //        let portion = weight / totalWeight;
-    //        let reward = nb * portion;
-    //        let isMyBid = node instanceof Bidder;
-    //        rewards.push({
-    //            "bid": node.value,
-    //            "reward": reward,
-    //            "me": isMyBid
-    //        });
-    //    }
-    //    return rewards;
-    //}
-
     this.calcRewards = function (nb) {
         // Uses a weighting system.
         // This will change in the future.
