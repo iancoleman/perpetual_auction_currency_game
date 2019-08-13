@@ -11,4 +11,5 @@ Node = function() {
 
     this.el.textContent = this.value;
 
+    this.totals = 0;
 }

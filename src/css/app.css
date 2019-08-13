@@ -27,7 +27,32 @@
     border: solid 4px #F00;
 }
 
+.boards {
+    width: 350px;
+    text-align: center;
+    border: 1px solid red;
+    position: inherit
+}
+
+.leaderboard {
+    width: 160px;
+    float: left;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.leaderboard-totals {
+    width: 160px;
+    float: right;
+    border: 1px solid black;
+    display: inline-block;
+}
+
 .leaderboard .my-bid {
+    background-color: rgba(255,0,255,0.3);
+}
+
+.leaderboard-totals .my-bid {
     background-color: rgba(255,0,255,0.3);
 }
 

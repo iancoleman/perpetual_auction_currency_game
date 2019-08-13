@@ -10,7 +10,8 @@ Bidder = function() {
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
 
-    this.value = prng.nextRange(1000,2000);
+    this.value = prng.nextRange(1000, 2000);
+    this.totals = 0;
 
     let input = this.el.querySelectorAll("input")[0];
     input.value = this.value;
@@ -23,24 +24,24 @@ Bidder = function() {
     }
 
     this.onInput = function(fn) {
-        inputListeners.push(fn)
+        inputListeners.push(fn);
     }
 
     this.onEnter = function(fn) {
-        enterListeners.push(fn)
+        enterListeners.push(fn);
     }
 
     function handleInput(e) {
         self.value = parseInt(input.value);
-        for (let i=0; i<inputListeners.length; i++) {
+        for (let i = 0; i < inputListeners.length; i++) {
             inputListeners[i]();
         }
     }
 
     function handleKeyup(e) {
         // handle Enter
-        if (e.keyCode == 13) {
-            for (let i=0; i<enterListeners.length; i++) {
+        if (e.keyCode === 13) {
+            for (let i = 0; i < enterListeners.length; i++) {
                 enterListeners[i]();
             }
         }

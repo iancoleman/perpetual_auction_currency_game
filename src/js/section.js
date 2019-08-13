@@ -20,22 +20,22 @@ Section = function() {
 
     this.average = function() {
         let avgSum = 0;
-        for (let i=0; i<self.nodes.length; i++) {
+        for (let i = 0; i < self.nodes.length; i++) {
             avgSum = avgSum + self.nodes[i].value;
         }
-        let avg = avgSum / self.nodes.length
+        let avg = avgSum / self.nodes.length;
         return avg;
     }
 
     this.median = function() {
         let medianIndexes = getMedianIndexes();
         let medianSum = 0;
-        for (let i=0; i<medianIndexes.length; i++) {
+        for (let i = 0; i < medianIndexes.length; i++) {
             let mi = medianIndexes[i];
             let medianValue = self.nodes[mi].value;
             medianSum = medianSum + medianValue;
         }
-        let median = medianSum / medianIndexes.length
+        let median = medianSum / medianIndexes.length;
         return median;
     }
 
@@ -47,7 +47,7 @@ Section = function() {
         let bid = {
             "average": avg,
             "median": median,
-            "use": "median",
+            "use": "median"
         };
         // median 95% of the time, average 5% of the time
         if(prng.nextFloat() > 0.95) {
@@ -56,36 +56,75 @@ Section = function() {
         return bid;
     }
 
-    this.calcRewards = function(nb) {
+    //this.calcRewards = function(nb) {
+    //    // Uses a weighting system.
+    //    // This will change in the future.
+    //    // Code here is not very efficient but is ok for now.
+    //    let totalDistance = 0;
+    //    // Calculate total distance
+    //    for (let i = 0; i < self.nodes.length; i++) {
+    //        let distance = Math.abs(self.nodes[i].value - nb);
+    //        totalDistance = totalDistance + distance;
+    //    }
+    //    // Calculate total weight
+    //    let totalWeight = 0;
+    //    for (let i = 0; i < self.nodes.length; i++) {
+    //        let distance = Math.abs(self.nodes[i].value - nb);
+    //        let weight = totalDistance - distance;
+    //        totalWeight = totalWeight + weight;
+    //    }
+    //    // Calculate reward from portion of weight
+    //    let rewards = [];
+    //    for (let i = 0; i < self.nodes.length; i++) {
+    //        let node = self.nodes[i];
+    //        let distance = Math.abs(node.value - nb);
+    //        let weight = totalDistance - distance;
+    //        let portion = weight / totalWeight;
+    //        let reward = nb * portion;
+    //        let isMyBid = node instanceof Bidder;
+    //        rewards.push({
+    //            "bid": node.value,
+    //            "reward": reward,
+    //            "me": isMyBid
+    //        });
+    //    }
+    //    return rewards;
+    //}
+
+    this.calcRewards = function (nb) {
         // Uses a weighting system.
         // This will change in the future.
         // Code here is not very efficient but is ok for now.
         let totalDistance = 0;
         // Calculate total distance
-        for (let i=0; i<self.nodes.length; i++) {
+        for (let i = 0; i < self.nodes.length; i++) {
             let distance = Math.abs(self.nodes[i].value - nb);
             totalDistance = totalDistance + distance;
         }
         // Calculate total weight
         let totalWeight = 0;
-        for (let i=0; i<self.nodes.length; i++) {
+        for (let i = 0; i < self.nodes.length; i++) {
             let distance = Math.abs(self.nodes[i].value - nb);
             let weight = totalDistance - distance;
             totalWeight = totalWeight + weight;
         }
         // Calculate reward from portion of weight
         let rewards = [];
-        for (let i=0; i<self.nodes.length; i++) {
+        for (let i = 0; i < self.nodes.length; i++) {
             let node = self.nodes[i];
             let distance = Math.abs(node.value - nb);
             let weight = totalDistance - distance;
             let portion = weight / totalWeight;
             let reward = nb * portion;
             let isMyBid = node instanceof Bidder;
+
+            node.totals += reward;
+
             rewards.push({
                 "bid": node.value,
                 "reward": reward,
                 "me": isMyBid,
+                "totals": node.totals
             });
         }
         return rewards;
@@ -99,20 +138,20 @@ Section = function() {
         // put nodes in correct order
         sort();
         // show nodes
-        for (let i=0; i<self.nodes.length; i++) {
+        for (let i = 0; i < self.nodes.length; i++) {
             let n = self.nodes[i];
             setNotMedian(n);
             self.el.appendChild(n.el);
         }
         // highlight median
         let medianIndexes = getMedianIndexes();
-        for (let i=0; i<medianIndexes.length; i++) {
+        for (let i = 0; i < medianIndexes.length; i++) {
             let mi = medianIndexes[i];
             let n = self.nodes[mi];
             setAsMedian(n);
         }
         // focus on bidder input if present
-        for (let i=0; i<self.nodes.length; i++) {
+        for (let i = 0; i < self.nodes.length; i++) {
             let n = self.nodes[i];
             if (n instanceof Bidder) {
                 n.focus();
@@ -123,7 +162,7 @@ Section = function() {
     function getMedianIndexes() {
         let indexes = [];
         let nodeIndex = (self.nodes.length - 1) / 2;
-        if (self.nodes.length % 2 == 0) {
+        if (self.nodes.length % 2 === 0) {
             indexes.push(Math.floor(nodeIndex));
             indexes.push(Math.ceil(nodeIndex));
         }
@@ -152,5 +191,4 @@ Section = function() {
             return 0;
         });
     }
-
 }

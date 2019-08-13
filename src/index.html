@@ -8,7 +8,8 @@
         <p>
             The rules of the game can be found at
             <a href="https://safenetforum.org/t/perpetual-auction-currency/29488">
-                Perpetual Auction Currency</a>.
+                Perpetual Auction Currency
+            </a>.
         </p>
         <p>Bids from nodes in your section and neighbours are shown below.</p>
         <p>Set your bid to try to maximise your reward and press Enter.</p>
@@ -27,7 +28,6 @@
                 each GET until a new neighbour bid arrives:
             </p>
         </div>
-        <div id="leaderboard"></div>
         <hr>
         <div id="documentation">
             <p>Try these if you like using Developer Tools:</p>
@@ -38,17 +38,23 @@
             <p><code>section.median()</code>: median of all bids in section</p>
         </div>
 
-        <script id = "section-template" type="text/template">
+
+        <div class="boards">
+            <div id="leaderboard"></div>
+            <div id="leaderboard-totals"></div>
+        </div>
+
+        <script id="section-template" type="text/template">
             <div class="section">
             </div>
         </script>
 
-        <script id = "node-template" type="text/template">
+        <script id="node-template" type="text/template">
             <div class="node">
             </div>
         </script>
 
-        <script id = "bidder-template" type="text/template">
+        <script id="bidder-template" type="text/template">
             <div class="bidder">
                 <input type="number">
             </div>
@@ -56,6 +62,9 @@
 
         <script id="leaderboard-template" type="text/template">
             <table class="leaderboard">
+                <tr>
+                    <th>Current</th>
+                </tr>
                 <tr>
                     <th></th>
                     <th>Bid</th>
@@ -72,12 +81,35 @@
             </tr>
         </script>
 
+        <script id="leaderboard-template-totals" type="text/template">
+            <table class="leaderboard-totals">
+                <tr>
+                    <th>Totals</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Bid</th>
+                    <th>Reward</th>
+                </tr>
+            </table>
+        </script>
+
+        <script id="leaderboard-row-template-totals" type="text/template">
+            <tr>
+                <td class="rank"></td>
+                <td class="bid"></td>
+                <td class="reward"></td>
+            </tr>
+        </script>
+
         <script src="js/prng.js"></script>
         <script src="js/node.js"></script>
         <script src="js/bidder.js"></script>
         <script src="js/section.js"></script>
         <script src="js/leaderboard.js"></script>
         <script src="js/leaderboardrow.js"></script>
+        <script src="js/leaderboardtotals.js"></script>
+        <script src="js/leaderboardtotalsrow.js"></script>
         <script src="js/network.js"></script>
         <script src="js/app.js"></script>
     </body>
