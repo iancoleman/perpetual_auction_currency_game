@@ -19,24 +19,13 @@ Section = function() {
     }
 
     this.average = function() {
-        let avgSum = 0;
-        for (let i=0; i<self.nodes.length; i++) {
-            avgSum = avgSum + self.nodes[i].value;
-        }
-        let avg = avgSum / self.nodes.length
-        return avg;
+        let nodeValues = self.nodes.map(function(n) { return n.value });
+        return Stats.average(nodeValues);
     }
 
     this.median = function() {
-        let medianIndexes = getMedianIndexes();
-        let medianSum = 0;
-        for (let i=0; i<medianIndexes.length; i++) {
-            let mi = medianIndexes[i];
-            let medianValue = self.nodes[mi].value;
-            medianSum = medianSum + medianValue;
-        }
-        let median = medianSum / medianIndexes.length
-        return median;
+        let nodeValues = self.nodes.map(function(n) { return n.value });
+        return Stats.median(nodeValues);
     }
 
     this.getBid = function() {
