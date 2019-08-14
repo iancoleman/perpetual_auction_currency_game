@@ -9,14 +9,14 @@ Bidder = function() {
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
 
-    this.value = prng.nextRange(config.bid.min, config.bid.max);
+    this.bid = prng.nextRange(config.bid.min, config.bid.max);
 
     this.totalRewards = 0;
 
     let input = this.el.querySelectorAll("input")[0];
     input.setAttribute("min", config.bid.min);
     input.setAttribute("max", config.bid.max);
-    input.value = this.value;
+    input.value = this.bid;
 
     input.addEventListener("input", handleInput);
 
@@ -29,7 +29,7 @@ Bidder = function() {
     }
 
     function handleInput(e) {
-        self.value = parseInt(input.value);
+        self.bid = parseInt(input.value);
         for (let i=0; i<inputListeners.length; i++) {
             inputListeners[i]();
         }

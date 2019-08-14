@@ -19,13 +19,13 @@ Section = function() {
     }
 
     this.average = function() {
-        let nodeValues = self.nodes.map(function(n) { return n.value });
-        return Stats.average(nodeValues);
+        let nodeBids = self.nodes.map(function(n) { return n.bid });
+        return Stats.average(nodeBids);
     }
 
     this.median = function() {
-        let nodeValues = self.nodes.map(function(n) { return n.value });
-        return Stats.median(nodeValues);
+        let nodeBids = self.nodes.map(function(n) { return n.bid });
+        return Stats.median(nodeBids);
     }
 
     this.getBid = function() {
@@ -52,13 +52,13 @@ Section = function() {
         let totalDistance = 0;
         // Calculate total distance
         for (let i=0; i<self.nodes.length; i++) {
-            let distance = Math.abs(self.nodes[i].value - nb);
+            let distance = Math.abs(self.nodes[i].bid - nb);
             totalDistance = totalDistance + distance;
         }
         // Calculate total weight
         let totalWeight = 0;
         for (let i=0; i<self.nodes.length; i++) {
-            let distance = Math.abs(self.nodes[i].value - nb);
+            let distance = Math.abs(self.nodes[i].bid - nb);
             let weight = totalDistance - distance;
             totalWeight = totalWeight + weight;
         }
@@ -66,7 +66,7 @@ Section = function() {
         let rewards = [];
         for (let i=0; i<self.nodes.length; i++) {
             let node = self.nodes[i];
-            let distance = Math.abs(node.value - nb);
+            let distance = Math.abs(node.bid - nb);
             let weight = totalDistance - distance;
             let portion = weight / totalWeight;
             let reward = nb * portion;
@@ -77,7 +77,7 @@ Section = function() {
             // But right now it's just 1 * reward
             node.totalRewards = node.totalRewards + reward;
             rewards.push({
-                "bid": node.value,
+                "bid": node.bid,
                 "reward": reward,
                 "total": node.totalRewards,
                 "me": isMyBid,
@@ -138,10 +138,10 @@ Section = function() {
 
     function sort() {
         self.nodes.sort(function(a, b) {
-            if (a.value > b.value) {
+            if (a.bid > b.bid) {
                 return 1;
             }
-            if (a.value < b.value) {
+            if (a.bid < b.bid) {
                 return -1;
             }
             return 0;

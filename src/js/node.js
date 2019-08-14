@@ -7,10 +7,10 @@ Node = function() {
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
 
-    this.value = prng.nextRange(config.bid.min, config.bid.max);
+    this.bid = prng.nextRange(config.bid.min, config.bid.max);
 
     this.totalRewards = 0;
 
-    this.el.textContent = this.value;
+    this.el.textContent = this.bid;
 
 }
