@@ -79,6 +79,7 @@ Section = function() {
             rewards.push({
                 "bid": node.value,
                 "reward": reward,
+                "total": node.totalRewards,
                 "me": isMyBid,
             });
         }

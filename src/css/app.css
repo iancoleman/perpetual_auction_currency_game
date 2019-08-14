@@ -27,7 +27,24 @@
     border: solid 4px #F00;
 }
 
-.leaderboard .my-bid {
+.leaderboard {
+    border-collapse: collapse;
+}
+
+.leaderboard td {
+    text-align: center;
+}
+
+.leaderboard th,
+.leaderboard td {
+    padding: 10px 15px;
+}
+
+.leaderboard tr:nth-of-type(even) {
+    background-color: #EEE;
+}
+
+.leaderboard tr.my-bid {
     background-color: rgba(255,0,255,0.3);
 }
 
