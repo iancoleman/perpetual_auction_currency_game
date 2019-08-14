@@ -9,6 +9,8 @@ Node = function() {
 
     this.value = prng.nextRange(config.bid.min, config.bid.max);
 
+    this.totalRewards = 0;
+
     this.el.textContent = this.value;
 
 }

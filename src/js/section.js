@@ -71,6 +71,11 @@ Section = function() {
             let portion = weight / totalWeight;
             let reward = nb * portion;
             let isMyBid = node instanceof Bidder;
+            // TODO consider the accumulation of rewards.
+            // There might be N Gets between NBs
+            // So it should be N * reward
+            // But right now it's just 1 * reward
+            node.totalRewards = node.totalRewards + reward;
             rewards.push({
                 "bid": node.value,
                 "reward": reward,

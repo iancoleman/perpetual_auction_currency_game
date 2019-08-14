@@ -11,6 +11,8 @@ Bidder = function() {
 
     this.value = prng.nextRange(config.bid.min, config.bid.max);
 
+    this.totalRewards = 0;
+
     let input = this.el.querySelectorAll("input")[0];
     input.setAttribute("min", config.bid.min);
     input.setAttribute("max", config.bid.max);
