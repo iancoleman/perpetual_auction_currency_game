@@ -1,4 +1,4 @@
-app = new (function() {
+game = new (function() {
 
     let self = this;
 

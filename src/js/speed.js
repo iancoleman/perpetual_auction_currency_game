@@ -32,7 +32,7 @@ speed = new (function() {
 
     function sliderChanged() {
         updateText();
-        app.doTick();
+        game.doTick();
     }
 
     function updateText() {
