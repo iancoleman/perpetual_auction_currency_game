@@ -26,7 +26,6 @@ network = new (function() {
                 if (isMySection && j == myNodeIndex) {
                     let b = new Bidder();
                     s.addNode(b);
-                    b.onEnter(doNeighbourBid);
                 }
                 else {
                     let n = new Node();
