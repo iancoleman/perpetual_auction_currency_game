@@ -35,7 +35,7 @@ network = new (function() {
         }
     }
 
-    function doNeighbourBid() {
+    this.doNeighbourBid = function() {
         // select random neighbour (must not be my section)
         let neighbourIndex = prng.nextRange(0, self.sections.length);
         while (neighbourIndex == mySectionIndex) {
