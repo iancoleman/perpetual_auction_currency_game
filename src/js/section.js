@@ -8,6 +8,8 @@ Section = function() {
     container = document.createElement("div");
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
+    let medianEl = this.el.querySelectorAll(".median")[0];
+    let averageEl = this.el.querySelectorAll(".average")[0];
     let nodesEl = this.el.querySelectorAll(".nodes")[0];
 
     this.addNode = function(n) {
@@ -97,6 +99,10 @@ Section = function() {
             let n = self.nodes[i];
             nodesEl.appendChild(n.el);
         }
+        // show median
+        medianEl.textContent = self.median();
+        // show average
+        averageEl.textContent = self.average().toFixed(1);
         // focus on bidder input if present
         for (let i=0; i<self.nodes.length; i++) {
             let n = self.nodes[i];
