@@ -32,6 +32,12 @@
             <span id="speed-text">2 seconds</span>
             <input type="range" min="0" value="5" id="speed">
         </p>
+        <div class="stats">
+            <div>median(medians): <span class="median-medians"></span></div>
+            <div>average(averages): <span class="average-averages"></span></div>
+            <div>avearge(medians): <span class="average-medians"></span></div>
+            <div>median(averages): <span class="median-averages"></span></div>
+        </div>
         <div id="network"></div>
         <div class="neighbour-bid hidden">
             <p>
@@ -112,6 +118,7 @@
         <script src="js/config.js"></script>
         <script src="js/speed.js"></script>
         <script src="js/eventsource.js"></script>
+        <script src="js/networkstats.js"></script>
         <script src="js/game.js"></script>
     </body>
 </html>
