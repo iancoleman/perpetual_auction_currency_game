@@ -8,6 +8,7 @@ Section = function() {
     container = document.createElement("div");
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
+    let nodesEl = this.el.querySelectorAll(".nodes")[0];
 
     this.addNode = function(n) {
         self.nodes.push(n);
@@ -88,13 +89,13 @@ Section = function() {
 
     function render() {
         // clear current node elements
-        while (self.el.firstChild) {
-            self.el.removeChild(self.el.firstChild);
+        while (nodesEl.firstChild) {
+            nodesEl.removeChild(nodesEl.firstChild);
         }
         // show nodes
         for (let i=0; i<self.nodes.length; i++) {
             let n = self.nodes[i];
-            self.el.appendChild(n.el);
+            nodesEl.appendChild(n.el);
         }
         // focus on bidder input if present
         for (let i=0; i<self.nodes.length; i++) {
