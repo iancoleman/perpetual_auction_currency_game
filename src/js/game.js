@@ -2,8 +2,6 @@ game = new (function() {
 
     let self = this;
 
-    let nextTick = null;
-
     function init() {
         // generate initial network
         network.makeRandomSections();
@@ -12,18 +10,7 @@ game = new (function() {
         // TODO
 
         // start the simulation
-        self.doTick();
-    }
-
-    this.doTick = function() {
-        // cancel next tick if it exists
-        if (nextTick != null) {
-            clearTimeout(nextTick);
-        }
-        // do actions for this tick
-        network.doNeighbourBid();
-        // schedule the next tick
-        nextTick = setTimeout(self.doTick, speed.msPerTick());
+        eventsource.start();
     }
 
     init();
