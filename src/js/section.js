@@ -91,20 +91,10 @@ Section = function() {
         while (self.el.firstChild) {
             self.el.removeChild(self.el.firstChild);
         }
-        // put nodes in correct order
-        sort();
         // show nodes
         for (let i=0; i<self.nodes.length; i++) {
             let n = self.nodes[i];
-            setNotMedian(n);
             self.el.appendChild(n.el);
-        }
-        // highlight median
-        let medianIndexes = getMedianIndexes();
-        for (let i=0; i<medianIndexes.length; i++) {
-            let mi = medianIndexes[i];
-            let n = self.nodes[mi];
-            setAsMedian(n);
         }
         // focus on bidder input if present
         for (let i=0; i<self.nodes.length; i++) {
@@ -113,39 +103,6 @@ Section = function() {
                 n.focus();
             }
         }
-    }
-
-    function getMedianIndexes() {
-        let indexes = [];
-        let nodeIndex = (self.nodes.length - 1) / 2;
-        if (self.nodes.length % 2 == 0) {
-            indexes.push(Math.floor(nodeIndex));
-            indexes.push(Math.ceil(nodeIndex));
-        }
-        else {
-            indexes.push(nodeIndex);
-        }
-        return indexes;
-    }
-
-    function setNotMedian(n) {
-        n.el.classList.remove("median");
-    }
-
-    function setAsMedian(n) {
-        n.el.classList.add("median");
-    }
-
-    function sort() {
-        self.nodes.sort(function(a, b) {
-            if (a.bid > b.bid) {
-                return 1;
-            }
-            if (a.bid < b.bid) {
-                return -1;
-            }
-            return 0;
-        });
     }
 
 }
