@@ -62,7 +62,7 @@
             <p><code>section.average()</code>: average of all bids in section</p>
             <p><code>section.median()</code>: median of all bids in section</p>
             <p><code>eventsource.nextEvent()</code>: trigger the next neighbour bid</p>
-            <p><code>node.setCalcBidFn((function() { return self.bid + 1; }).toString())</code>: set the function for updating the bid</p>
+            <p><code>node.setCalcBidFn(function() { return self.bid + 1; })</code>: set the function for updating the bid</p>
             <p><code>eventsource.afterNbEvent(node.updateBid)</code>: update the node bid after every neighbour bid event</p>
         </div>
 

@@ -14,6 +14,9 @@ Node = function() {
     // This function can be set by the user.
     // It simply calculates and returns a bid value.
     // It doesn't apply that bid to this node.
+    // This is 'how' to bid, not 'when' to bid.
+    // For 'when' to bid, look at the updateBid method.
+    //
     // Indentation is unusual for this so that when calcBid.toString()
     // is called the indentation will be for a non-nested function.
     this.calcBid = function() {
@@ -25,8 +28,8 @@ Node = function() {
     return self.bid
 }
 
-    this.setCalcBidFn = function(fnStr) {
-        eval("self.calcBid = " + fnStr);
+    this.setCalcBidFn = function(fn) {
+        self.calcBid = fn;
     }
 
     this.updateBid = function() {
