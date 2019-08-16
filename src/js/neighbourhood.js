@@ -55,6 +55,7 @@ neighbourhood = new (function() {
         // calculate reward distribution
         let bid = nb.use == "median" ? nb.median : nb.average;
         let mySection = self.sections[mySectionIndex];
+        mySection.neighbourBid = bid;
         let rewards = mySection.calcRewards(bid);
         // display neighbour bid details
         document.querySelectorAll(".neighbour-bid .using")[0].textContent = nb.use;

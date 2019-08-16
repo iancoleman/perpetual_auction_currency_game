@@ -6,6 +6,8 @@ Section = function(name) {
 
     this.nodes = [];
 
+    this.neighbourBid = null;
+
     let template = document.getElementById("section-template").innerHTML;
     container = document.createElement("div");
     container.innerHTML = template;
