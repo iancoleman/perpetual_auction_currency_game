@@ -42,4 +42,7 @@ Node = function(name) {
     self.updateBid();
     render();
 
+    // update the bid after every new neighbour bid arrives
+    eventsource.afterNbEvent(self.updateBid);
+
 }
