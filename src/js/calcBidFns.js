@@ -11,6 +11,10 @@ calcBidFns.firstRandomThenConstant = function(node) {
     return node.bid
 }
 
+calcBidFns.alwaysRandom = function(node) {
+    return prng.nextRange(config.bid.min, config.bid.max);
+}
+
 calcBidFns.convergeToNb = function(node) {
     // if no bid, generate a random bid
     if (!node.bid) {
