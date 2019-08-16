@@ -37,37 +37,49 @@ neighbourhood = new (function() {
         }
     }
 
-    this.doNeighbourBid = function() {
-        // select random neighbour (must not be my section)
-        let neighbourIndex = prng.nextRange(0, self.sections.length);
-        while (neighbourIndex == mySectionIndex) {
-            neighbourIndex = prng.nextRange(0, self.sections.length);
-        }
-        let neighbour = self.sections[neighbourIndex];
-        // calculate neighbour bid
-        let nb = neighbour.getBid();
-        // unhighlight all neighbours
+    this.doNeighbourBids = function() {
+        // update neighbour bid for all sections in a random order.
+        let sectionIndexes = [];
         for (let i=0; i<self.sections.length; i++) {
-            self.sections[i].el.classList.remove("active-neighbour");
+            sectionIndexes.push(i);
         }
-        // highlight neighbour
-        neighbour.el.classList.add("active-neighbour");
-        // calculate reward distribution
-        let bid = nb.use == "median" ? nb.median : nb.average;
-        let mySection = self.sections[mySectionIndex];
-        mySection.neighbourBid = bid;
-        let rewards = mySection.calcRewards(bid);
-        // display neighbour bid details
-        document.querySelectorAll(".neighbour-bid .using")[0].textContent = nb.use;
-        document.querySelectorAll(".neighbour-bid .bid")[0].textContent = bid;
-        document.querySelectorAll(".neighbour-bid")[0].classList.remove("hidden");
-        // display rewards leaderboard
-        let leaderboard = new Leaderboard(rewards);
-        let lbEl = document.getElementById("leaderboard");
-        while (lbEl.firstChild) {
-            lbEl.removeChild(lbEl.firstChild);
+        sectionIndexes = prng.shuffle(sectionIndexes);
+        for (let i=0; i<sectionIndexes.length; i++) {
+            let sectionIndex = sectionIndexes[i];
+            let section = self.sections[sectionIndex];
+            // select random neighbour (must not be this section)
+            let neighbourIndex = prng.nextRange(0, self.sections.length);
+            while (neighbourIndex == sectionIndex) {
+                neighbourIndex = prng.nextRange(0, self.sections.length);
+            }
+            let neighbour = self.sections[neighbourIndex];
+            // calculate neighbour bid
+            let nb = neighbour.getBid();
+            // calculate reward distribution
+            let bid = nb.use == "median" ? nb.median : nb.average;
+            section.neighbourBid = bid;
+            let rewards = section.calcRewards(bid);
+            // do some extra display if this is my section
+            let isMySection = mySectionIndex == sectionIndex;
+            if (isMySection) {
+                // display rewards leaderboard
+                let leaderboard = new Leaderboard(rewards);
+                let lbEl = document.getElementById("leaderboard");
+                while (lbEl.firstChild) {
+                    lbEl.removeChild(lbEl.firstChild);
+                }
+                lbEl.appendChild(leaderboard.el);
+                // highlight neighbour
+                 for (let j=0; j<self.sections.length; j++) {
+                    self.sections[j].el.classList.remove("active-neighbour");
+                }
+                neighbour.el.classList.add("active-neighbour");
+                // display neighbour bid details
+                document.querySelectorAll(".neighbour-bid .using")[0].textContent = nb.use;
+                document.querySelectorAll(".neighbour-bid .bid")[0].textContent = bid;
+                document.querySelectorAll(".neighbour-bid")[0].classList.remove("hidden");
+            }
         }
-        lbEl.appendChild(leaderboard.el);
     }
 
 })();

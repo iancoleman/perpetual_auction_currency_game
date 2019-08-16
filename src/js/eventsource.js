@@ -15,7 +15,7 @@ eventsource = new (function() {
             clearTimeout(nextNbEvent);
         }
         // do actions for this event
-        neighbourhood.doNeighbourBid();
+        neighbourhood.doNeighbourBids();
         // run any subscriptions to this event
         doAfterNbSubscriptions();
         // schedule the next event
