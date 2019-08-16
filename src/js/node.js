@@ -30,7 +30,7 @@ Node = function(name) {
     }
 
     this.updateBid = function() {
-        self.bid = self.calcBid();
+        self.bid = self.calcBid(self);
         render();
     }
 

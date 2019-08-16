@@ -2,11 +2,11 @@
 
 calcBidFns = {};
 
-calcBidFns.firstRandomThenConstant = function() {
+calcBidFns.firstRandomThenConstant = function(node) {
     // if no bid, generate a random bid
-    if (!self.bid) {
+    if (!node.bid) {
         return prng.nextRange(config.bid.min, config.bid.max);
     }
     // return the current bid
-    return self.bid
+    return node.bid
 }
