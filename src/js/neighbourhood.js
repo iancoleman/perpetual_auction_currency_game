@@ -15,23 +15,23 @@ neighbourhood = new (function() {
         mySectionIndex = prng.nextRange(0, totalSections);
         for (let i=0; i<totalSections; i++) {
             let sectionName = "s" + self.sections.length;
-            let s = new Section(sectionName);
-            self.sections.push(s);
-            self.el.appendChild(s.el);
+            let section = new Section(sectionName);
+            self.sections.push(section);
+            self.el.appendChild(section.el);
             let nodesInSection = prng.nextRange(config.nodes_per_section.min, config.nodes_per_section.max);
             let isMySection = mySectionIndex == i;
             if (isMySection) {
                 myNodeIndex = prng.nextRange(0, nodesInSection);
             }
             for (let j=0; j<nodesInSection; j++) {
-                let nodeName = sectionName + "n" + s.nodes.length;
+                let nodeName = sectionName + "n" + section.nodes.length;
                 if (isMySection && j == myNodeIndex) {
-                    let b = new Bidder(nodeName);
-                    s.addNode(b);
+                    let bidder = new Bidder(nodeName);
+                    section.addNode(bidder);
                 }
                 else {
-                    let n = new Node(nodeName);
-                    s.addNode(n);
+                    let node = new Node(nodeName);
+                    section.addNode(node);
                 }
             }
         }
