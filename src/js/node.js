@@ -21,17 +21,7 @@ Node = function(name) {
     // It doesn't apply that bid to this node.
     // This is 'how' to bid, not 'when' to bid.
     // For 'when' to bid, look at the updateBid method.
-    //
-    // Indentation is unusual for this so that when calcBid.toString()
-    // is called the indentation will be for a non-nested function.
-    this.calcBid = function() {
-    // if no bid, generate a random bid
-    if (!self.bid) {
-        return prng.nextRange(config.bid.min, config.bid.max);
-    }
-    // return the current bid
-    return self.bid
-}
+    this.calcBid = calcBidFns.firstRandomThenConstant;
 
     this.setCalcBidFn = function(fn) {
         self.calcBid = fn;
