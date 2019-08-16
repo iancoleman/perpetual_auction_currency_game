@@ -1,6 +1,8 @@
-Section = function() {
+Section = function(name) {
 
     let self = this;
+
+    this.name = name;
 
     this.nodes = [];
 
@@ -8,6 +10,7 @@ Section = function() {
     container = document.createElement("div");
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
+    let nameEl = this.el.querySelectorAll(".name")[0];
     let medianEl = this.el.querySelectorAll(".median")[0];
     let averageEl = this.el.querySelectorAll(".average")[0];
     let nodesEl = this.el.querySelectorAll(".nodes")[0];
@@ -80,10 +83,12 @@ Section = function() {
             // But right now it's just 1 * reward
             node.totalRewards = node.totalRewards + reward;
             rewards.push({
+                "name": node.name,
                 "bid": node.bid,
                 "reward": reward,
                 "total": node.totalRewards,
                 "me": isMyBid,
+
             });
         }
         return rewards;
@@ -99,6 +104,8 @@ Section = function() {
             let n = self.nodes[i];
             nodesEl.appendChild(n.el);
         }
+        // show name
+        nameEl.textContent = self.name;
         // show median
         medianEl.textContent = self.median();
         // show average

@@ -69,6 +69,7 @@
         <script id = "section-template" type="text/template">
             <div class="section">
                 <div class="stats">
+                    <div class="name"></div>
                     <div>Median: <span class="median"></span></div>
                     <div>Average: <span class="average"></span></div>
                 </div>
@@ -78,6 +79,7 @@
 
         <script id = "node-template" type="text/template">
             <div class="node">
+                <span class="name"></span>:<span class="bid"></span>
             </div>
         </script>
 
@@ -91,6 +93,7 @@
             <table class="leaderboard">
                 <tr>
                     <th></th>
+                    <th>Name</th>
                     <th>Bid</th>
                     <th>Reward</th>
                     <th>sum(Rewards)</th>
@@ -101,6 +104,7 @@
         <script id="leaderboard-row-template" type="text/template">
             <tr>
                 <td class="rank"></td>
+                <td class="name"></td>
                 <td class="bid"></td>
                 <td class="reward"></td>
                 <td class="total"></td>

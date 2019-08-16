@@ -1,4 +1,4 @@
-Node = function() {
+Node = function(name) {
 
     let self = this;
 
@@ -6,6 +6,11 @@ Node = function() {
     container = document.createElement("div");
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
+
+    let nameEl = this.el.querySelectorAll(".name")[0];
+    let bidEl = this.el.querySelectorAll(".bid")[0];
+
+    this.name = name;
 
     this.bid = null;
 
@@ -38,7 +43,8 @@ Node = function() {
     }
 
     function render() {
-        self.el.textContent = self.bid;
+        nameEl.textContent = self.name;
+        bidEl.textContent = self.bid;
     }
 
     self.updateBid();

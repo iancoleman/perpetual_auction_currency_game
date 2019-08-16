@@ -1,4 +1,4 @@
-Bidder = function() {
+Bidder = function(name) {
 
     let self = this;
 
@@ -9,6 +9,7 @@ Bidder = function() {
     container.innerHTML = template;
     this.el = container.querySelectorAll("*")[0];
 
+    this.name = name;
     this.bid = prng.nextRange(config.bid.min, config.bid.max);
 
     this.totalRewards = 0;

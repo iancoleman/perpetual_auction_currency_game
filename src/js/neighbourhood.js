@@ -14,7 +14,8 @@ neighbourhood = new (function() {
         let totalSections = prng.nextRange(config.sections.min, config.sections.max);
         mySectionIndex = prng.nextRange(0, totalSections);
         for (let i=0; i<totalSections; i++) {
-            let s = new Section();
+            let sectionName = "s" + self.sections.length;
+            let s = new Section(sectionName);
             self.sections.push(s);
             self.el.appendChild(s.el);
             let nodesInSection = prng.nextRange(config.nodes_per_section.min, config.nodes_per_section.max);
@@ -23,12 +24,13 @@ neighbourhood = new (function() {
                 myNodeIndex = prng.nextRange(0, nodesInSection);
             }
             for (let j=0; j<nodesInSection; j++) {
+                let nodeName = sectionName + "n" + s.nodes.length;
                 if (isMySection && j == myNodeIndex) {
-                    let b = new Bidder();
+                    let b = new Bidder(nodeName);
                     s.addNode(b);
                 }
                 else {
-                    let n = new Node();
+                    let n = new Node(nodeName);
                     s.addNode(n);
                 }
             }
