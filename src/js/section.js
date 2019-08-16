@@ -17,6 +17,7 @@ Section = function(name) {
 
     this.addNode = function(n) {
         self.nodes.push(n);
+        n.section = self;
         render();
         // rerender if bidder changes
         if (n instanceof Bidder) {

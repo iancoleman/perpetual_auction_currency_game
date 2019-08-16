@@ -14,6 +14,8 @@ Node = function(name) {
 
     this.bid = null;
 
+    this.section = null;
+
     this.totalRewards = 0;
 
     // This function can be set by the user.

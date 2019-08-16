@@ -10,6 +10,7 @@ Bidder = function(name) {
     this.el = container.querySelectorAll("*")[0];
 
     this.name = name;
+    this.section = null;
     this.bid = prng.nextRange(config.bid.min, config.bid.max);
 
     this.totalRewards = 0;
