@@ -5,9 +5,9 @@
     let amEl = document.querySelectorAll(".average-medians")[0];
     let maEl = document.querySelectorAll(".median-averages")[0];
 
-    function renderNetworkStats() {
-        let medians = network.sections.map(function(s) { return s.median() });
-        let averages = network.sections.map(function(s) { return s.average() });
+    function renderNeighbourhoodStats() {
+        let medians = neighbourhood.sections.map(function(s) { return s.median() });
+        let averages = neighbourhood.sections.map(function(s) { return s.average() });
         let mm = Stats.median(medians);
         let aa = Stats.average(averages);
         let am = Stats.average(medians);
@@ -18,6 +18,6 @@
         maEl.textContent = ma.toFixed(1);
     }
 
-    eventsource.afterNbEvent(renderNetworkStats);
+    eventsource.afterNbEvent(renderNeighbourhoodStats);
 
 })();

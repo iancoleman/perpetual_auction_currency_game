@@ -1,8 +1,8 @@
-network = new (function() {
+neighbourhood = new (function() {
 
     let self = this;
 
-    this.el = document.getElementById("network");
+    this.el = document.getElementById("neighbourhood");
 
     this.sections = [];
 
