@@ -25,5 +25,21 @@ RNG.prototype.nextRange = function(start, end) {
 RNG.prototype.choice = function(array) {
   return array[this.nextRange(0, array.length)];
 }
+// see https://stackoverflow.com/a/2450976
+RNG.prototype.shuffle = function(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(this.nextFloat() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
 
 let prng = new RNG();
