@@ -2,7 +2,7 @@ Bidder = function(name) {
 
     let self = this;
 
-    let inputListeners = [];
+    let changeBidListeners = [];
 
     let template = document.getElementById("bidder-template").innerHTML;
     container = document.createElement("div");
@@ -20,20 +20,20 @@ Bidder = function(name) {
     input.setAttribute("max", config.bid.max);
     input.value = this.bid;
 
-    input.addEventListener("input", handleInput);
+    input.addEventListener("input", handleChangeBid);
 
     this.focus = function() {
         input.focus();
     }
 
-    this.onInput = function(fn) {
-        inputListeners.push(fn)
+    this.onBidChange = function(fn) {
+        changeBidListeners.push(fn)
     }
 
-    function handleInput(e) {
+    function handleChangeBid(e) {
         self.bid = parseInt(input.value);
-        for (let i=0; i<inputListeners.length; i++) {
-            inputListeners[i]();
+        for (let i=0; i<changeBidListeners.length; i++) {
+            changeBidListeners[i]();
         }
     }
 

@@ -2,6 +2,8 @@ Node = function(name) {
 
     let self = this;
 
+    let changeBidListeners = [];
+
     let template = document.getElementById("node-template").innerHTML;
     container = document.createElement("div");
     container.innerHTML = template;
@@ -32,6 +34,17 @@ Node = function(name) {
     this.updateBid = function() {
         self.bid = self.calcBid(self);
         render();
+        handleChangeBid();
+    }
+
+    this.onBidChange = function(fn) {
+        changeBidListeners.push(fn);
+    }
+
+    function handleChangeBid() {
+        for (let i=0; i<changeBidListeners.length; i++) {
+            changeBidListeners[i]();
+        }
     }
 
     function render() {

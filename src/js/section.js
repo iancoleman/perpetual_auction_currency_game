@@ -21,10 +21,8 @@ Section = function(name) {
         self.nodes.push(n);
         n.section = self;
         render();
-        // rerender if bidder changes
-        if (n instanceof Bidder) {
-            n.onInput(render);
-        }
+        // rerender if bid changes
+        n.onBidChange(renderStats);
     }
 
     this.average = function() {
@@ -109,10 +107,8 @@ Section = function(name) {
         }
         // show name
         nameEl.textContent = self.name;
-        // show median
-        medianEl.textContent = self.median();
-        // show average
-        averageEl.textContent = self.average().toFixed(1);
+        // show stats
+        renderStats();
         // focus on bidder input if present
         for (let i=0; i<self.nodes.length; i++) {
             let n = self.nodes[i];
@@ -120,6 +116,14 @@ Section = function(name) {
                 n.focus();
             }
         }
+
+    }
+
+    function renderStats() {
+        // show median
+        medianEl.textContent = self.median();
+        // show average
+        averageEl.textContent = self.average().toFixed(1);
     }
 
 }
