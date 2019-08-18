@@ -38,29 +38,35 @@ neighbourhood = new (function() {
     }
 
     this.doNeighbourBids = function() {
-        // update neighbour bid for all sections in a random order.
-        let sectionIndexes = [];
+        // pick a random new neighbour bid to broadcast
+        let neighbourIndex = prng.nextRange(0, self.sections.length);
+        let neighbour = self.sections[neighbourIndex];
+        // calculate neighbour bid
+        let nb = neighbour.getBid();
+        let bid = nb.use == "median" ? nb.median : nb.average;
+        // unhighlight previous neighbour
         for (let i=0; i<self.sections.length; i++) {
-            sectionIndexes.push(i);
+            self.sections[i].el.classList.remove("active-neighbour");
         }
-        sectionIndexes = prng.shuffle(sectionIndexes);
-        for (let i=0; i<sectionIndexes.length; i++) {
-            let sectionIndex = sectionIndexes[i];
-            let section = self.sections[sectionIndex];
-            // select random neighbour (must not be this section)
-            let neighbourIndex = prng.nextRange(0, self.sections.length);
-            while (neighbourIndex == sectionIndex) {
-                neighbourIndex = prng.nextRange(0, self.sections.length);
+        // highlight new neighbour
+        neighbour.el.classList.add("active-neighbour");
+        // display neighbour bid details
+        document.querySelectorAll(".neighbour-bid .using")[0].textContent = nb.use;
+        document.querySelectorAll(".neighbour-bid .bid")[0].textContent = bid;
+        document.querySelectorAll(".neighbour-bid")[0].classList.remove("hidden");
+        // set all other sections to use this neighbour bid
+        for (let i=0; i<self.sections.length; i++) {
+            // don't update the new neighbour with their own bid
+            let sameSectionAsNeighbour = i == neighbourIndex;
+            if (sameSectionAsNeighbour) {
+                continue;
             }
-            let neighbour = self.sections[neighbourIndex];
-            // calculate neighbour bid
-            let nb = neighbour.getBid();
             // calculate reward distribution
-            let bid = nb.use == "median" ? nb.median : nb.average;
+            let section = self.sections[i];
             section.neighbourBid = bid;
             let rewards = section.calcRewards(bid);
             // do some extra display if this is my section
-            let isMySection = mySectionIndex == sectionIndex;
+            let isMySection = mySectionIndex == i;
             if (isMySection) {
                 // display rewards leaderboard
                 let leaderboard = new Leaderboard(rewards);
@@ -69,15 +75,6 @@ neighbourhood = new (function() {
                     lbEl.removeChild(lbEl.firstChild);
                 }
                 lbEl.appendChild(leaderboard.el);
-                // highlight neighbour
-                 for (let j=0; j<self.sections.length; j++) {
-                    self.sections[j].el.classList.remove("active-neighbour");
-                }
-                neighbour.el.classList.add("active-neighbour");
-                // display neighbour bid details
-                document.querySelectorAll(".neighbour-bid .using")[0].textContent = nb.use;
-                document.querySelectorAll(".neighbour-bid .bid")[0].textContent = bid;
-                document.querySelectorAll(".neighbour-bid")[0].classList.remove("hidden");
             }
         }
     }
